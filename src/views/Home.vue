@@ -1,6 +1,6 @@
 <template>
-    <div class="home">
-        Rien
+    <div class="container mx-auto">
+        <h1>Home</h1>
     </div>
 </template>
 

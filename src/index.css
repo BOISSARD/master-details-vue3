@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+h1 { @apply text-5xl my-4; }
+h2 { @apply text-4xl my-3; }
+h3 { @apply text-3xl my-2; }
+h4 { @apply text-2xl my-2; }
+h5 { @apply text-xl my-1; }
+h6 { @apply text-lg my-1; }
+
+/** "primary", "secondary", "neutral", "success", "warning", "error", "infos" **/
+/* .gradient-primary { @apply from-blue-400 via-blue-700 to-blue-500 } */
+.gradient-primary { @apply from-primary-moins via-primary to-primary-plus }
+.gradient-secondary { @apply from-secondary-moins via-secondary to-secondary-plus }
+.gradient-neutral { @apply from-neutral-moins via-neutral to-neutral-plus }
+.gradient-success { @apply from-success-moins via-success to-success-plus }
+.gradient-warning { @apply from-warning-moins via-warning to-warning-plus }
+.gradient-error { @apply from-error-moins via-error to-error-plus }
+.gradient-infos { @apply from-infos-moins via-infos to-infos-plus }
