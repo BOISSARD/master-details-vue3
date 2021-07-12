@@ -1,6 +1,5 @@
 <template>
   <div class="container mx-auto">
-    <h1>Tests composants tailwind</h1>
     <h2>Les couleurs</h2>
     <div v-for="color in colors">
       <div class="flex font-black">
@@ -31,7 +30,7 @@
 
 <script>
 export default {
-  name: "tests",
+  name: "colors",
   data: () => ({
     colors: [
       "primary",
