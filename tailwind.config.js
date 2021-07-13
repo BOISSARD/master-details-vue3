@@ -9,9 +9,9 @@ module.exports = {
       colors: {
         // "primary", "secondary", "neutral", "success", "warning", "error", "infos"
         primary: {
-          moins: colors.lightBlue[500],
+          moins: colors.lightBlue[400],
           DEFAULT: colors.blue[500],
-          plus: colors.indigo[500],
+          plus: colors.indigo[600],
         },
         secondary: {
           moins: colors.fuchsia[500],
