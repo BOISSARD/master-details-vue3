@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto">
+  <div class="container">
     <h1>Tests composants Vue3 & TailwindCSS</h1>
     <router-view />
   </div>

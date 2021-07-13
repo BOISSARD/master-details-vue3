@@ -1,8 +1,8 @@
 <template>
-  <div class="container mx-auto">
+  <div class="container">
     <h2>Les couleurs</h2>
     <div v-for="color in colors">
-      <div class="flex font-black">
+      <div class="flex flex-wrap lg:flex-nowrap lg:space-x-2 font-black overflow-hidden">
         <div
           class="conteneurColor shadow-xl"
           :class="[`bg-${color}`]"
@@ -46,12 +46,22 @@ export default {
 };
 </script>
 
-<style>
+<style lang="postcss">
 .conteneurColor {
-  @apply flex-1 flex justify-center m-3 p-5 rounded-xl
+  @apply w-full flex justify-center my-1 px-5 py-2 rounded-xl
+}
+@screen lg {
+  .conteneurColor {
+    @apply w-1/3 py-5
+  }
 }
 
 .textColor {
-  @apply uppercase text-5xl
+  @apply uppercase text-3xl
+}
+@screen lg {
+  .textColor {
+    @apply text-5xl
+  }
 }
 </style>

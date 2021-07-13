@@ -45,6 +45,18 @@ module.exports = {
         },
       }
     },
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: '4px',
+        sm: '1rem',
+        md: '2rem',
+        lg: '3rem',
+        xl: '4rem',
+        '2xl': '5rem',
+        '3xl': '6rem',
+      },
+    }
   },
   variants: {
     extend: {},
