@@ -3,13 +3,12 @@
     <div class="h-screen" :style="{paddingTop: `${navHeight}px`,}"><!-- pt-14 sm:pt-24    :style="{...rootStyle}" -->
         <!-- {{rootClasses}} ($event, 'nav')
 		 v-resize="onResizeNav" -->
-		<nav  v-resize="onResizeNav" ref="nav" class="fixed w-full z-30 top-0 bg-white shadow">
+		<nav v-resize="onResizeNav" ref="nav" id="nav" class="fixed w-full z-30 top-0 bg-white shadow">
             <div class="w-full flex flex-wrap items-center justify-between mt-0 py-2 px-2 lg:px-4">
                 <div class="flex items-center">
                     <router-link to="/">
-                        <a
+                        <span
                             class="
-                                font-black
                                 uppercase
                                 text-4xl text-transparent
                                 bg-clip-text bg-gradient-to-r
@@ -42,7 +41,7 @@
                                     d=" M 510.7 189.151 C 505.271 168.95 484.565 156.956 464.365 162.385 L 330.156 198.367 L 155.924 35.878 L 107.19 49.008 L 211.729 230.183 L 86.232 263.767 L 36.614 224.754 L 0 234.603 L 45.957 314.27 L 65.274 347.727 L 105.802 336.869 L 240.011 300.886 L 349.726 271.469 L 483.935 235.486 C 504.134 230.057 516.129 209.352 510.7 189.151 Z "
                                 /></svg
                             >Projet Vue3
-                        </a>
+                        </span>
                     </router-link>
                 </div>
 				<!-- {{navHeight}} {{rootHeight}} {{footerHeight}} -->
@@ -65,7 +64,6 @@
                             rounded-full
                             font-bold
                             shadow
-                            opacity-75
                             text-white
                             hover:underline
                             hover:shadow-inner
@@ -78,7 +76,7 @@
                     </button>
                 </div>
             </div>
-            <hr class="h-0.5 bg-gradient-to-r gradient-primary opacity-50 my-0 py-0"/>
+            <hr class="h-0.5 bg-gradient-to-l gradient-primary opacity-50 my-0 py-0"/>
         </nav>
 		<!--  v-resize="onResizeRoot" -->
 		<!-- <div ref="root" :style="{minHeight: `calc(100% - ${footerHeight}px`}">

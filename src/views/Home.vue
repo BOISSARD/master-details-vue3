@@ -41,7 +41,7 @@
         </g>
       </svg>
     </div>
-    <!--  -->
+    <!-- Les sections sous le degradé -->
     <section class="bg-white border-b py-8">
       <div class="container max-w-5xl mx-auto m-8">
         <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
@@ -62,7 +62,7 @@
 
               Images from:
 
-              <a class="text-secondary underline" href="https://undraw.co/">undraw.co</a>
+              <a class="text-secondary-plus underline" href="https://undraw.co/">undraw.co</a>
             </p>
           </div>
           <div class="w-full sm:w-1/2 p-6">
@@ -323,7 +323,7 @@
                 d="m1002.9 620.79s-273.2-156.82-390.82-127.11c0 0-249.27 26.825-278.15 85.84 0 0-79.237-247.61-108.12-255.87"
                 fill="none"
                 opacity=".8"
-                class="stroke-current text-secondary-moins"
+                class="stroke-current text-primary-moins"
                 stroke-miterlimit="10"
                 stroke-width="2"
               />
@@ -332,7 +332,7 @@
                 d="m333.9 579.53c45.809-122.16 458.5-257.52 458.5-257.52-58.602 14.857-180.35 171.68-180.35 171.68s-257.52-187.36-386.28-170.03c0 0 567.04 18.571 777.1 297.14"
                 fill="none"
                 opacity=".8"
-                class="stroke-current text-secondary-moins"
+                class="stroke-current text-primary-moins"
                 stroke-miterlimit="10"
                 stroke-width="2"
               />
@@ -354,7 +354,7 @@
                 <br />
                 Images from:
 
-                <a class="text-secondary underline" href="https://undraw.co/">undraw.co</a>
+                <a class="text-secondary-plus underline" href="https://undraw.co/">undraw.co</a>
               </p>
             </div>
           </div>
@@ -527,6 +527,85 @@ import { defineComponent } from "vue";
 export default defineComponent({
     name: "Home",
     components: {
+    },
+    mounted() {
+        var scrollPos = window.scrollY;
+        this.setNavGradientElseWhite(true)
+
+        document.addEventListener("scroll", this.scrollSetGradientElseWhite);
+    },
+    methods:{
+        scrollSetGradientElseWhite() {
+            let scrollPos = window.scrollY;
+            let scrollStep = 30, opacityStep = 10, opacityMin = 0, opacityMax = 100
+            let step = Math.floor(scrollPos/scrollStep), nbStep = (opacityMax - opacityMin)/opacityStep
+
+            let gradient = scrollPos < 700//20 * nbStep
+            
+            let opacityPourcent = opacityMax
+            if(step < nbStep) {
+                // opacityPourcent = opacityMax - opacityStep * step
+            }
+            // console.log(scrollPos)//, step, nbStep, scrollStep, opacityPourcent, `bg-opacity-${opacityPourcent}`)
+            this.setNavGradientElseWhite(gradient, opacityPourcent)
+        },
+        setNavGradientElseWhite(gradient = false, opacityPourcent = 100) {
+            // console.log("setNavGradientElseWhite", gradient, opacityPourcent)
+            // Les classses en mode gradient ou white 
+            let navWhiteClasses = ["bg-white"], navGradientClasses = ["bg-gradient-to-l", "gradient-primary", `opacity-${opacityPourcent}`]
+            let hrWhiteClasses = ["bg-gradient-to-l", "gradient-primar", "opacity-50"], hrGradientClasses = ["bg-white"]
+            let titleWhiteClasses = ["text-transparent", "bg-clip-text", "bg-gradient-to-r", "gradient-primary"], titleGradientClasses = ["text-white"],
+                iconWhiteClasses = ["text-primary-moins"], iconGradientClasses = ["text-white"]
+            let liensWhiteClasses :string[] = [], liensGradientClasses = ["text-white"]
+            let boutonWhiteClasses = ["bg-gradient-to-tr", "gradient-primary", "text-white"], boutonGradientClasses = ["bg-white", "text-primary"]
+
+            let navClassesToAdd = gradient ? navGradientClasses : navWhiteClasses,
+                navClassesToRemove = gradient ? navWhiteClasses : navGradientClasses
+            let titleClassesToAdd = gradient ? titleGradientClasses : titleWhiteClasses,
+                titleClassesToRemove = gradient ? titleWhiteClasses : titleGradientClasses
+            let iconClassesToAdd = gradient ? iconGradientClasses : iconWhiteClasses,
+                iconClassesToRemove = gradient ? iconWhiteClasses : iconGradientClasses
+            let liensClassesToAdd = gradient ? liensGradientClasses : liensWhiteClasses,
+                liensClassesToRemove = gradient ? liensWhiteClasses : liensGradientClasses
+            let boutonClassesToAdd = gradient ? boutonGradientClasses : boutonWhiteClasses,
+                boutonClassesToRemove = gradient ? boutonWhiteClasses : boutonGradientClasses
+            let hrClassesToAdd = gradient ? hrGradientClasses : hrWhiteClasses,
+                hrClassesToRemove = gradient ? hrWhiteClasses : hrGradientClasses
+
+            var nav = document.getElementById("nav");
+            nav?.classList.forEach(classe => {
+                if(classe.includes("opacity"))
+                    nav?.classList.remove(classe);
+            })
+            nav?.classList.remove(...navClassesToRemove);
+            nav?.classList.add(...navClassesToAdd);
+            
+            var hr = nav?.children[1] 
+            // hr?.classList.remove(...hrClassesToRemove);
+            // hr?.classList.add(...hrClassesToAdd);
+
+            var navContent = nav?.firstElementChild; 
+
+            var title = navContent?.firstElementChild?.firstElementChild?.firstElementChild;
+            title?.classList.remove(...titleClassesToRemove);
+            title?.classList.add(...titleClassesToAdd);
+            var icon = title?.firstElementChild
+            icon?.classList.remove(...iconClassesToRemove);
+            icon?.classList.add(...iconClassesToAdd);
+
+            var liens = navContent?.lastElementChild?.firstElementChild
+            liens?.classList.remove(...liensClassesToRemove)
+            liens?.classList.add(...liensClassesToAdd)
+            var bouton = navContent?.lastElementChild?.lastElementChild
+            bouton?.classList.remove(...boutonClassesToRemove);
+            bouton?.classList.add(...boutonClassesToAdd);        
+        }
+    },
+    // unmounted / beforeDestroy
+    unmounted() {
+        // console.log("beforeDestroy")
+        document.removeEventListener("scroll", this.scrollSetGradientElseWhite);
+        this.setNavGradientElseWhite()
     },
 });
 </script>
