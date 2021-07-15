@@ -5,6 +5,7 @@
     <router-link
         v-for="route in routes"
         :to="`${path}${route.path}`"
+        :key="route.name"
     >
         <li class="text-xl">
             {{route.name}}
@@ -36,7 +37,7 @@ export default {
         }
     },
     created() {
-        console.log(this.routes, this.path)
+        // console.log(this.routes, this.path)
     }
 }
 </script>

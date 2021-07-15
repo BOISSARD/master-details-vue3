@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h2>Les couleurs</h2>
-    <div v-for="color in colors">
+    <div v-for="color in colors" :key="color">
       <div class="flex flex-wrap lg:flex-nowrap lg:space-x-2 font-black overflow-hidden">
         <div
           class="conteneurColor shadow-xl"

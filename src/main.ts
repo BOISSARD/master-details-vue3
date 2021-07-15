@@ -4,4 +4,6 @@ import router from './router'
 import store from './store'
 import './index.css'
 
-createApp(App).use(store).use(router).mount('#app')
+import VueResizeObserver from "vue-resize-observer"
+
+createApp(App).use(store).use(router).use(VueResizeObserver).mount('#app')
