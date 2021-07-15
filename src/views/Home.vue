@@ -1,8 +1,8 @@
 <template>
-    <!-- Yolo -->
-    <div class="container">
+    Yolo
+    <!-- <div class="container">
         <h1>Home</h1>
-    </div>
+    </div> -->
 </template>
 
 <script lang="ts">

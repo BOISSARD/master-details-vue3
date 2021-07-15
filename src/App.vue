@@ -1,8 +1,9 @@
 <template>
-    <div v-resize="onResizeTotal" :class="[...rootClasses]" :style="{paddingTop: `${navHeight}px`,}"><!-- pt-14 sm:pt-24    :style="{...rootStyle}" -->
+	<!-- v-resize="onResizeTotal"  -->
+    <div class="h-screen" :style="{paddingTop: `${navHeight}px`,}"><!-- pt-14 sm:pt-24    :style="{...rootStyle}" -->
         <!-- {{rootClasses}} ($event, 'nav')
 		 v-resize="onResizeNav" -->
-		<nav ref="nav" class="fixed w-full z-30 top-0 bg-white shadow">
+		<nav  v-resize="onResizeNav" ref="nav" class="fixed w-full z-30 top-0 bg-white shadow">
             <div class="w-full flex flex-wrap items-center justify-between mt-0 py-2 px-2 lg:px-4">
                 <div class="flex items-center">
                     <router-link to="/">
@@ -80,11 +81,16 @@
             <hr class="h-0.5 bg-gradient-to-r gradient-primary opacity-50 my-0 py-0"/>
         </nav>
 		<!--  v-resize="onResizeRoot" -->
-		<div ref="root" :style="{minHeight: `calc(100% - ${footerHeight}px`}">
+		<!-- <div ref="root" :style="{minHeight: `calc(100% - ${footerHeight}px`}">
 	        <router-view />
+		</div> -->
+		<div :style="{minHeight: `calc(100% - ${footerHeight + (this.rootHasChildren() ? offsetFooter : 0)}px`}">
+			<router-view v-slot="{ Component }">
+				<component ref="root" :is="Component"/>
+			</router-view>
 		</div>
 		<!-- v-resize="onResizeFooter" -->
-        <footer ref="footer" class="bg-gray-200 w-full h-10"></footer>
+        <footer v-resize="onResizeFooter" ref="footer" class="bg-gray-200 w-full h-10"></footer>
     </div>
 </template>
 
@@ -102,7 +108,7 @@ export default defineComponent({
 		rootHeight: 0,
 		navHeight: 0,
 		footerHeight: 0,
-		offsetFooter: 0, //16,
+		offsetFooter: 16, //16,
     }),
     computed: {
 		pageIsSmallerThanWindow() {
@@ -129,30 +135,30 @@ export default defineComponent({
 			switch(el) {
 				case "nav": if(height) this.navHeight = height; break;
 				case "root": if(height) this.rootHeight = height; break;
-				case "footer": 
-					if(height) this.footerHeight = this.rootHasChildren() ? height + this.offsetFooter : height; 
-				break;
+				case "footer": if(height) this.footerHeight = height; break;
 				default: 
-					console.log("onResize", el, this.rootHasChildren(), this.refsData.root && this.refsData.root)
+					// console.log("onResize", el, this.rootHasChildren(), this.refsData.root && this.refsData.root)
 					this.navHeight = this.refsData.nav && this.refsData.nav.clientHeight || 0
 					this.rootHeight = this.refsData.root && this.refsData.root.clientHeight || 0
-					this.footerHeight = this.refsData.footer ? this.rootHasChildren() ? this.refsData.footer.clientHeight + this.offsetFooter : this.refsData.footer.clientHeight : 0
-					console.log("onResize", el, this.navHeight, this.rootHeight, this.footerHeight)
+					this.footerHeight = this.refsData.footer ? this.refsData.footer.clientHeight : 0
+					// console.log("onResize", el, this.navHeight, this.rootHeight, this.footerHeight)
 					break;
 			}
 			// }, 200)
 		},
 		rootHasChildren() {
-			// console.log(this.refsData.root, this.refsData.root && this.refsData.root.childNodes)
+			console.log("============\nrootHasChildren", this.refsData.root, this.refsData.root && this.refsData.root.$el)
+			return this.refsData.root && this.refsData.root.$el
+
 			let retour = false
-			this.refsData.root.childNodes.forEach(child => {
-				let nodeName = String(child.nodeName).toLowerCase()
-				// console.log(child.nodeType, nodeName)
-				let acceptedTypes = [1]
-				if(acceptedTypes.includes(child.nodeType) && nodeName !== "object"){
-					retour = true
-				}
-			})
+			// this.refsData.root.childNodes.forEach(child => {
+			// 	let nodeName = String(child.nodeName).toLowerCase()
+			// 	console.log("rootHasChildren", child.nodeType, nodeName)
+			// 	let acceptedTypes = [1]
+			// 	if(acceptedTypes.includes(child.nodeType) && nodeName !== "object"){
+			// 		retour = true
+			// 	}
+			// })
 			return retour
 		}
     },
