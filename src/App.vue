@@ -11,7 +11,7 @@
                             class="
                                 font-black
                                 uppercase
-                                text-2xl text-transparent
+                                text-4xl text-transparent
                                 bg-clip-text bg-gradient-to-r
                                 gradient-primary
                             "
@@ -19,12 +19,12 @@
                         >
                             <svg
                                 class="
-                                    h-6
+                                    h-10
                                     fill-current
                                     inline
                                     relative
                                     -top-0.5
-                                    mr-1
+                                    mr-2
                                     text-primary-moins
                                 "
                                 xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +41,7 @@
                                     class="plane-take-off"
                                     d=" M 510.7 189.151 C 505.271 168.95 484.565 156.956 464.365 162.385 L 330.156 198.367 L 155.924 35.878 L 107.19 49.008 L 211.729 230.183 L 86.232 263.767 L 36.614 224.754 L 0 234.603 L 45.957 314.27 L 65.274 347.727 L 105.802 336.869 L 240.011 300.886 L 349.726 271.469 L 483.935 235.486 C 504.134 230.057 516.129 209.352 510.7 189.151 Z "
                                 /></svg
-                            >Entrainement
+                            >Projet Vue3
                         </a>
                     </router-link>
                 </div>
@@ -147,7 +147,7 @@ export default defineComponent({
 			// }, 200)
 		},
 		rootHasChildren() {
-			console.log("============\nrootHasChildren", this.refsData.root, this.refsData.root && this.refsData.root.$el)
+			// console.log("============\nrootHasChildren", this.refsData.root, this.refsData.root && this.refsData.root.$el)
 			return this.refsData.root && this.refsData.root.$el
 
 			let retour = false
